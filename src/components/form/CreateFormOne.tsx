@@ -1,3 +1,4 @@
+import { Controller, useFormContext } from "react-hook-form";
 import Input from "./Input";
 
 type FormOne = {
@@ -8,72 +9,101 @@ type FormOne = {
   remotetype: string;
 };
 
-type AccountFormProps = FormOne & {
-  updateFields: (fields: Partial<FormOne>) => void;
-};
+export default function CreateFormOne() {
+  const { control, formState } = useFormContext();
 
-export default function CreateFormOne({
-  jobtitle,
-  company,
-  industry,
-  location,
-  remotetype,
-  updateFields,
-}: AccountFormProps) {
   return (
     <div className="flex flex-col gap-6">
-      <Input
-        labelId="email"
-        required
-        placeholder="ex. UX UI Designer"
-        type="text"
-        value={jobtitle}
-        onChange={(e) => updateFields({ jobtitle: e.target.value })}
-      >
-        Job title
-      </Input>
+      <Controller
+        name="jobtitle"
+        control={control}
+        render={({ field }) => {
+          return (
+            <Input
+              placeholder="ex. UX UI Designer"
+              label="Job title"
+              type="text"
+              error={formState.errors.jobtitle?.message?.toString()}
+              required
+              value={field.value}
+              onChange={(e) => field.onChange(e.target.value)}
+            />
+          );
+        }}
+      />
 
-      <Input
-        labelId="companyname"
-        required
-        placeholder="ex. Google"
-        type="text"
-        value={company}
-        onChange={(e) => updateFields({ company: e.target.value })}
-      >
-        Company name
-      </Input>
-      <Input
-        labelId="industry"
-        required
-        placeholder="ex. Information Technology"
-        type="text"
-        value={industry}
-        onChange={(e) => updateFields({ industry: e.target.value })}
-      >
-        Industry
-      </Input>
+      <Controller
+        name="company"
+        control={control}
+        render={({ field }) => {
+          return (
+            <Input
+              placeholder="ex. Google"
+              label="Company name"
+              type="text"
+              error={formState.errors.company?.message?.toString()}
+              required
+              value={field.value}
+              onChange={(e) => field.onChange(e.target.value)}
+            />
+          );
+        }}
+      />
+
+      <Controller
+        name="industry"
+        control={control}
+        render={({ field }) => {
+          return (
+            <Input
+              placeholder="ex. Information Technology"
+              label="Industry"
+              type="text"
+              error={formState.errors.industry?.message?.toString()}
+              required
+              value={field.value}
+              onChange={(e) => field.onChange(e.target.value)}
+            />
+          );
+        }}
+      />
+
       <div className="flex justify-between gap-6">
-        <Input
-          labelId="location"
-          required
-          placeholder="ex. Chennai"
-          type="text"
-          value={location}
-          onChange={(e) => updateFields({ location: e.target.value })}
-        >
-          Location
-        </Input>
-        <Input
-          labelId="remotetype"
-          required
-          placeholder="ex. In-office"
-          type="text"
-          value={remotetype}
-          onChange={(e) => updateFields({ remotetype: e.target.value })}
-        >
-          Remote Type
-        </Input>
+        <Controller
+          name="location"
+          control={control}
+          render={({ field }) => {
+            return (
+              <Input
+                placeholder="ex. Chennai"
+                label="Location"
+                type="text"
+                error={formState.errors.location?.message?.toString()}
+                required
+                value={field.value}
+                onChange={(e) => field.onChange(e.target.value)}
+              />
+            );
+          }}
+        />
+
+        <Controller
+          name="remotetype"
+          control={control}
+          render={({ field }) => {
+            return (
+              <Input
+                placeholder="ex. In-office"
+                label="Remote Type"
+                type="text"
+                error={formState.errors.company?.message?.toString()}
+                required
+                value={field.value}
+                onChange={(e) => field.onChange(e.target.value)}
+              />
+            );
+          }}
+        />
       </div>
     </div>
   );

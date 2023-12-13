@@ -15,8 +15,8 @@ export type FormData = {
   industry: string;
   location: string;
   remotetype: string;
-  experience: { min: string; max: string };
-  salary: { min: string; max: string };
+  experience: { min: number | null; max: number | null };
+  salary: { min: number | null; max: number | null };
   totalemployee: string;
   applytype: applyType;
 };
@@ -36,8 +36,8 @@ export default function MutliForm({
     industry: "",
     location: "",
     remotetype: "",
-    experience: { min: "", max: "" },
-    salary: { min: "", max: "" },
+    experience: { min: null, max: null },
+    salary: { min: null, max: null },
     totalemployee: "",
     applytype: "",
   };

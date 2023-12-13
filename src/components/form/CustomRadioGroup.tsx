@@ -37,6 +37,7 @@ const CustomRadioGroup: React.FC<CustomRadioGroupProps> = ({
               <div className="flex gap-1">
                 <input
                   type="radio"
+                  required={required}
                   checked={checked}
                   onChange={() => onChange(option.value)}
                 />

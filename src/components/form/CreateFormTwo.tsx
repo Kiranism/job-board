@@ -1,10 +1,10 @@
 import CustomRadioGroup from "./CustomRadioGroup";
 import Input from "./Input";
-import { applyType } from "./MultiForm";
+import { type applyType } from "./MultiForm";
 
 type FormTwo = {
-  experience: { min: string; max: string };
-  salary: { min: string; max: string };
+  experience: { min: number | null; max: number | null };
+  salary: { min: number | null; max: number | null };
   totalemployee: string;
   applytype: applyType;
 };
@@ -27,10 +27,12 @@ export default function CreateFormTwo({
           labelId="Minimum"
           required
           placeholder="Minimum"
-          type="text"
-          value={experience.min}
+          type="number"
+          value={experience.min !== null ? Number(experience.min) : undefined}
           onChange={(e) =>
-            updateFields({ experience: { ...experience, min: e.target.value } })
+            updateFields({
+              experience: { ...experience, min: Number(e.target.value) },
+            })
           }
         >
           Experience
@@ -39,10 +41,12 @@ export default function CreateFormTwo({
           labelId="Maximum"
           required
           placeholder="Maximum"
-          type="text"
-          value={experience.max}
+          type="number"
+          value={experience.max !== null ? Number(experience.max) : undefined}
           onChange={(e) =>
-            updateFields({ experience: { ...experience, max: e.target.value } })
+            updateFields({
+              experience: { ...experience, max: Number(e.target.value) },
+            })
           }
         />
       </div>
@@ -51,10 +55,10 @@ export default function CreateFormTwo({
           labelId="Minimum"
           required
           placeholder="Minimum"
-          type="text"
-          value={salary.min}
+          type="number"
+          value={salary.min !== null ? Number(salary.min) : undefined}
           onChange={(e) =>
-            updateFields({ salary: { ...salary, min: e.target.value } })
+            updateFields({ salary: { ...salary, min: Number(e.target.value) } })
           }
         >
           Salary
@@ -64,9 +68,9 @@ export default function CreateFormTwo({
           required
           placeholder="Maximum"
           type="text"
-          value={salary.max}
+          value={salary.max !== null ? Number(salary.max) : undefined}
           onChange={(e) =>
-            updateFields({ salary: { ...salary, max: e.target.value } })
+            updateFields({ salary: { ...salary, max: Number(e.target.value) } })
           }
         />
       </div>

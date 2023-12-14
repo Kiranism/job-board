@@ -12,7 +12,7 @@ export default function Card({ item }: CardProps) {
   const minSalary = formatIndianCurrency(item.salary.min);
   const maxSalary = formatIndianCurrency(item.salary.max);
   return (
-    <div className="flex relative text-fontdark gap-2 border border-cardborder bg-cardcolor rounded-lg max-w-[830px]  h-[320px] py-4 px-6">
+    <div className="flex relative text-fontdark gap-2 border border-cardborder bg-cardcolor rounded-lg max-w-[830px]  min-h-[320px] py-4 px-6">
       <div className="w-10">
         <img src="/logo.png" />
       </div>
@@ -21,7 +21,7 @@ export default function Card({ item }: CardProps) {
           <h1 className="text-2xl font-normal">{item.jobtitle}</h1>
           <h6 className="text-base">{item.company + " - " + item.industry}</h6>
           <h6 className="text-base text-placeholder">
-            {item.location + ", " + item.remotetype}
+            {item?.location + ", " + item?.remotetype}
           </h6>
         </div>
         <div className="flex gap-2 flex-col mb-6 text-base">

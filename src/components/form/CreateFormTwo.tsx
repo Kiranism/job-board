@@ -1,21 +1,14 @@
 import { Controller, useFormContext } from "react-hook-form";
 import CustomRadioGroup from "./CustomRadioGroup";
 import Input from "./Input";
-import { FormData, type applyType } from "./MultiForm";
-
-type FormTwo = {
-  experience: { min: number | null; max: number | null };
-  salary: { min: number | null; max: number | null };
-  totalemployee: string;
-  applytype: applyType;
-};
+import { FormData } from "./MultiForm";
 
 export default function CreateFormTwo() {
   const { control, formState } = useFormContext<FormData>();
   console.log("error", formState.errors);
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex justify-between items-end gap-6">
+      <div className="flex justify-between gap-6">
         <Controller
           name="experience.min"
           control={control}
@@ -23,7 +16,7 @@ export default function CreateFormTwo() {
             <Input
               placeholder="Minimum"
               label="Experience"
-              type="text"
+              type="number"
               error={formState.errors?.experience?.min?.message?.toString()}
               required
               value={field.value}
@@ -39,8 +32,9 @@ export default function CreateFormTwo() {
             return (
               <Input
                 placeholder="Maximum"
-                type="text"
-                error={formState.errors.experience?.message?.toString()}
+                type="number"
+                label=""
+                error={formState.errors.experience?.max?.message?.toString()}
                 required
                 value={field.value}
                 onChange={(e) => field.onChange(e.target.value)}
@@ -49,7 +43,7 @@ export default function CreateFormTwo() {
           }}
         />
       </div>
-      <div className="flex justify-between items-end gap-6">
+      <div className="flex justify-between  gap-6">
         <Controller
           name="salary.min"
           control={control}
@@ -58,8 +52,8 @@ export default function CreateFormTwo() {
               <Input
                 placeholder="Minimum"
                 label="Salary"
-                type="text"
-                error={formState.errors.salary?.message?.toString()}
+                type="number"
+                error={formState.errors.salary?.min?.message?.toString()}
                 required
                 value={field.value}
                 onChange={(e) => field.onChange(e.target.value)}
@@ -74,9 +68,9 @@ export default function CreateFormTwo() {
             return (
               <Input
                 placeholder="Maximum"
-                label="Salary"
-                type="text"
-                error={formState.errors.salary?.message?.toString()}
+                type="number"
+                label=""
+                error={formState.errors.salary?.max?.message?.toString()}
                 required
                 value={field.value!}
                 onChange={(e) => field.onChange(e.target.value)}
@@ -93,7 +87,7 @@ export default function CreateFormTwo() {
           return (
             <Input
               placeholder="ex. 100"
-              label="Salary"
+              label="Total employee"
               type="text"
               error={formState.errors.totalemployee?.message?.toString()}
               required
@@ -111,7 +105,7 @@ export default function CreateFormTwo() {
           return (
             <CustomRadioGroup
               value={field.value}
-              error={formState.errors.salary?.message?.toString()}
+              error={formState.errors.applytype?.message?.toString()}
               required
               label="Apply type"
               options={[
